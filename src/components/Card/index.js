@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image } from 'react-native'
 import FlipCard from 'react-native-flip-card'
-import { Container, Name } from './style'
 import { api } from '../../lib/api'
-import axios from 'axios'
+import CheckType from '../../lib/CheckType'
+import {
+  Container,
+  ContainerBack,
+  Name,
+  Title,
+  Types,
+  TypesWrapper
+} from './style'
 
 export default function index(props) {
 
@@ -24,17 +31,23 @@ export default function index(props) {
         }
         <Name>{props.name}</Name>
       </Container>
-      <Container>
-        <Text>types:</Text>
-        {Stats ?
-          Stats.types.map(t => (
-            <Text key={t.type.name}>
-              {t.type.name}
-            </Text>
-          ))
-          : <Text>Loading...</Text>
-        }
-        <Text>Abilities:</Text>
+
+      <ContainerBack>
+        <Title>Types:</Title>
+        <TypesWrapper>
+          {Stats ?
+            Stats.types.map(t => (
+              <View key={t.type.name}>
+                <Types
+                  bg={CheckType(t.type.name)}>
+                  {t.type.name}
+                </Types>
+              </View>
+            ))
+            : <Text>Loading...</Text>
+          }
+        </TypesWrapper>
+        <Title>Abilities:</Title>
         {Stats ?
           Stats.abilities.map(a => (
             <Text key={a.ability.url}>
@@ -44,7 +57,7 @@ export default function index(props) {
           : <Text>Loading...</Text>
         }
         <Text></Text>
-      </Container>
+      </ContainerBack>
     </FlipCard>
   )
 }
