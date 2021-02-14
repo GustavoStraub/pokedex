@@ -3,14 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { Button, StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native'
 import { api } from './src/lib/api'
 import Card from './src/components/Card'
-import axios from 'axios'
+import { Width, Height } from './src/lib/Screen'
 
 export default function App() {
 
   const [limit, setLimit] = useState(20)
   const [offset, setOffset] = useState(0)
   const [pokemons, setPokemons] = useState([])
-
   function NextPage() {
     setOffset(prev => prev + 20)
   }
@@ -24,9 +23,9 @@ export default function App() {
   }, [limit, offset])
 
   return (
-    <ScrollView>
+    <ScrollView backgroundColor='#1a1a1a'>
       <SafeAreaView />
-      <StatusBar backgroundColor='#cecece' style="dark" />
+      <StatusBar backgroundColor='#1a1a1a' style="light" />
       <View style={styles.container}>
         {pokemons.map(p => (
           <Card
@@ -34,17 +33,17 @@ export default function App() {
             name={p.name}
             text2={p.url} />
         ))}
-        <Button onPress={NextPage} title='next page' />
       </View>
+      {pokemons.length < 20 ? null : <Button onPress={NextPage} title='next page' />}
+      {offset == 0 ? null : <Button onPress={PrevPage} title='back page' />}
     </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#cecece',
     marginTop: 31,
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
 })
