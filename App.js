@@ -53,7 +53,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 31,
+    marginTop: 5,
     paddingTop: 10,
     justifyContent: 'center',
     alignItems: 'center'
