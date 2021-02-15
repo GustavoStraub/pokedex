@@ -1,15 +1,16 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect } from 'react'
-import { Button, StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native'
+import { Button, StyleSheet, View, ScrollView, SafeAreaView } from 'react-native'
 import { api } from './src/lib/api'
 import Card from './src/components/Card'
-import { Width, Height } from './src/lib/Screen'
+import FixedButton from './src/components/FixedButton'
 
 export default function App() {
 
   const [limit, setLimit] = useState(20)
   const [offset, setOffset] = useState(0)
   const [pokemons, setPokemons] = useState([])
+
   function NextPage() {
     setOffset(prev => prev + 20)
   }
@@ -26,6 +27,12 @@ export default function App() {
     <ScrollView backgroundColor='#1a1a1a'>
       <SafeAreaView />
       <StatusBar backgroundColor='#1a1a1a' style="light" />
+      <View style={{ alignItems: 'center', width: '100%', marginTop: 50 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10 }}>
+          {offset == 0 ? null : <FixedButton press={PrevPage} text='Prev' />}
+          {pokemons.length < 20 ? null : <FixedButton press={NextPage} text='Next' />}
+        </View>
+      </View>
       <View style={styles.container}>
         {pokemons.map(p => (
           <Card
@@ -34,8 +41,12 @@ export default function App() {
             text2={p.url} />
         ))}
       </View>
-      {pokemons.length < 20 ? null : <Button onPress={NextPage} title='next page' />}
-      {offset == 0 ? null : <Button onPress={PrevPage} title='back page' />}
+      <View style={{ alignItems: 'center', width: '100%' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10 }}>
+          {offset == 0 ? null : <FixedButton press={PrevPage} text='Prev' />}
+          {pokemons.length < 20 ? null : <FixedButton press={NextPage} text='Next' />}
+        </View>
+      </View>
     </ScrollView>
   )
 }
