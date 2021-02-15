@@ -19,9 +19,10 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 5,
     backgroundColor: '#fff',
-    width: Width / 2.5,
+    width: Width / 7,
     padding: 5,
     textAlign: 'center',
-    marginRight: 5
+    height: 40,
+    justifyContent: 'center'
   },
 })

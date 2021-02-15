@@ -4,6 +4,6 @@ import { Width } from '../../lib/Screen'
 export const TextButton = styled.Text`
 color: #fff;
 text-transform: capitalize;
-font-size: ${Width / 20}px;
+font-size: ${Width / 35}px;
 text-align: center;
 `
